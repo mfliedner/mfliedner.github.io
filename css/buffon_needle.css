@@ -7,6 +7,9 @@ body {
 #canvas {
     border: 2px solid #444444;
     background-color: #CCCCCC;
+    object-fit: contain;
+    width: 90%;
+    height: 90%;
 }
 
 #container {
