@@ -1,7 +1,12 @@
 const View = require('./view');
 
 $(document).ready(function() {
-  const root = $('.buffon');
-  const buffon_view = new View(root);
-  buffon_view.init();
+  const canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    const buffon_view = new View(canvas);
+    buffon_view.init();
+    buffon_view.run();
+  } else {
+    window.alert("This browser does not support canvas");
+  }
 });

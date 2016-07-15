@@ -1,20 +1,25 @@
-const Simulation = function(c) {
-  this.width  = 1200;
-  this.height = 800;
+const Needle = require('./needle');
+
+const Simulation = function(c, w, h) {
+  this.context = c;
+  this.width  = w;
+  this.height = h;
+
   this.nboards = 8;
   this.interval = Math.floor(this.height / this.nboards);
   this.needleLength = this.interval;
 
-  this.context = c;
   this.count = 0;
   this.hit = 0;
   this.running = false;
   this.max = 0;
 };
 
-Simulation.prototype.grid = function () {
+// generates empty grid of `nboards` horizontally
+// oriented floor boards on canvas
+Simulation.prototype.setGrid = function () {
   const ctx = this.context;
-  ctx.strokeStyle = "rgba(255,255,0,0.95)";
+  ctx.strokeStyle = "yellow";
   ctx.lineWidth = 1;
   ctx.clearRect(0, 0, this.width, this.height);
   ctx.beginPath();
@@ -23,22 +28,32 @@ Simulation.prototype.grid = function () {
     ctx.lineTo(this.width, i*this.interval);
     ctx.stroke();
   }
+}
 
+// inititiates needle drop simulation on Grid
+Simulation.prototype.run = function () {
+
+  // set up canvas with horizontal with `nboards` floor boards
+  this.setGrid();
 
   const self = this;
 
+  // start simulation
   document.getElementById('start').addEventListener('click', function()
     {
       self.running = true;
-      setTimeout(self.needle.bind(self), 200);
-    // startSim();
+      setTimeout(self.dropNeedle.bind(self), 200);
     }
   );
+
+  // stop simulation
   document.getElementById('stop').addEventListener('click', function()
     {
       self.running = false;
     }
   );
+
+  // reset simulation
   document.getElementById('new').addEventListener('click', function()
     {
       self.running = false;
@@ -46,18 +61,14 @@ Simulation.prototype.grid = function () {
       self.hit = 0;
       self.showStats();
 
-      ctx.strokeStyle = "rgba(255,255,0,0.95)";
-      ctx.lineWidth = 1;
-      ctx.clearRect(0, 0, self.width, self.height);
-      ctx.beginPath();
-      for (let i = 1; i < self.nboards; i++) {
-        ctx.moveTo(0, i*self.interval);
-        ctx.lineTo(self.width, i*self.interval);
-        ctx.stroke();
-      }
-      setTimeout(self.needle.bind(self), 200);
+      // reset grid to empty
+      self.setGrid();
+
+      setTimeout(self.dropNeedle.bind(self), 200);
     }
   );
+
+  // run fixed length simulation
   document.getElementById('max').addEventListener('click', function()
     {
       self.max = document.getElementById('max').value;
@@ -65,11 +76,10 @@ Simulation.prototype.grid = function () {
   );
 };
 
-Simulation.prototype.needle = function () {
-  const ref = 2 / Math.PI;
-  const ctx = this.context;
-  const r = this.needleLength / 2;
-  const yrange = this.interval / 2.0 + this.height;
+Simulation.prototype.dropNeedle = function () {
+  let hit = false;
+  const needle = new Needle(this.context, this.width, this.height,
+                            this.interval, this.needleLength);
 
   if (this.max > 0 && this.count >= this.max) {
     this.running = false;
@@ -77,34 +87,21 @@ Simulation.prototype.needle = function () {
 
   if (this.running) {
     this.count++;
-    const x = Math.floor(this.width * Math.random());
-    const y = Math.floor(yrange * Math.random());
-    const phi = 2 * Math.PI * Math.random();
-    const x1 = x - r * Math.cos(phi);
-    const y1 = y - r * Math.sin(phi);
-    const y1a = Math.floor(y1 + this.interval) % (2*this.interval);
-    const x2 = x + r * Math.cos(phi);
-    const y2 = y + r * Math.sin(phi);
-    const y2a = Math.floor(y2 + this.interval) % (2*this.interval);
-    if ( (y1a - this.interval) * (y2a - this.interval) < 0 ) {
+
+    needle.add();
+    hit = needle.hit();
+    if (hit) {
       this.hit++;
-      ctx.strokeStyle = "rgb(0,255,0)";
-    } else {
-      ctx.strokeStyle = "rgb(255,0,0)";
     }
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(Math.floor(x1), Math.floor(y1));
-    ctx.lineTo(Math.floor(x2), Math.floor(y2));
-    ctx.stroke();
-    ctx.clearRect(0, this.height, this.width, this.height);
+    needle.draw();
 
     this.showStats();
 
-    setTimeout(this.needle.bind(this), 10);
+    setTimeout(this.dropNeedle.bind(this), 10);
   }
 };
 
+// report updated result on document
 Simulation.prototype.showStats = function() {
     const miss = this.count - this.hit;
     let fraction = 1;
