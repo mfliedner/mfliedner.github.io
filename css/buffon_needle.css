@@ -59,6 +59,8 @@ h1, h2 {
     top: 50px;
     text-align: justify;
     max-width: 33%;
+    max-height: 100%;
+    overflow: auto;
 }
 
 .formula {
@@ -73,6 +75,11 @@ h1, h2 {
 
 .tosses {
   margin-top: 10px;
+}
+
+.start, .stop, .new {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
 }
 
 #start, .start {

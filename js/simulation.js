@@ -111,7 +111,8 @@ Simulation.prototype.showStats = function() {
     if (this.count > 0) {
       fraction = this.hit / this.count;
     }
-    const estimate = 2 * this.needleLength / this.interval / fraction;
+    let estimate = 2 * this.needleLength / this.interval / fraction;
+    estimate = estimate.toFixed(7);
     document.getElementById('count').innerHTML = this.count;
     document.getElementById('hits').innerHTML = this.hit;
     document.getElementById('misses').innerHTML = miss;
