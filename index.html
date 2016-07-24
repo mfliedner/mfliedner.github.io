@@ -20,7 +20,7 @@
 
       ga('create', 'UA-81192706-2', 'auto');
       ga('send', 'pageview');
-    </script> 
+    </script>
   </head>
   <body>
 
@@ -32,49 +32,58 @@
     <div id="introduction_panel" class="panel">
       <header>
         <h2 class="header_title">Introduction</h2>
-        <span id="hide_introduction">close</span>
+        <span id="hide_introduction" class="hide"></span>
       </header>
-      <p>
-      Georges-Louis Leclerc, Comte de Buffon (1707-1788) in the 18th century posed and solved
-      the very first problem of geometric probability. A needle of a given length L is tossed
-      on a wooden floor with evenly spaced cracks, distance D apart. What is the probability
-      of the needle hitting a crack? (The problem is nowadays known as Buffon's Needle problem.)
-      The answer he discovered with the help of integral calculus is given by the simple formula
-      </p>
-      <p class="formula">P = 2L/&pi;</p>
-      <p>
-      With P approximated by the ratio of hits to the total number of tosses, the formula offers a way
-      of evaluating &pi;, an observation that eventually led Pierre Simon Laplace (1749-1827) to propose
-      a method, known today as the Monte Carlo Method, for numerical evaluation of various quantities
-      by realizing appropriate random events.
-      <p>
-      History records several names of people who applied the method manually to approximate &pi;.
-      A Captain Fox indulged himself while recuperating from wounds incurred in the Civil War.
-      H. D&ouml;rrie mentions Wolf from Zurich (1850) who obtained &pi; = 3.1596 after 5000 throws, and the
-      Englishmen Smith (1855) and Fox (1864) who obtained &pi; = 3.1553 and &pi; = 3.1419 after 3200 and
-      1100 throws, respectively. The record is held by an Italian mathematician Lazzerini (1901), who
-      attained the accuracy of six decimal (3.1415929) digits after just 3408 throws. As there does not
-      appear any definite relationship between the number of throws and the accuracy of the approximation,
-      Lazzerini's success should probably be attributed to chance or luck as the case may be.
-      (The best Theory of Probability can do is to assure accuracy with a certain probability.
-      The expected accuracy may or may not be achieved in any particular set of experiments.)
-      </p>
-      See the whole article at <a href="http://www.cut-the-knot.org/ctk/August2001.shtml">Math Surprises</a>
+      <article id=introduction_body>
+        <p>
+        Georges-Louis Leclerc, Comte de Buffon (1707-1788) in the 18th century posed and solved
+        the very first problem of geometric probability. A needle of a given length L is tossed
+        on a wooden floor with evenly spaced cracks, distance D apart. What is the probability
+        of the needle hitting a crack? (The problem is nowadays known as Buffon's Needle problem.)
+        The answer he discovered with the help of integral calculus is given by the simple formula
+        </p>
+        <p class="formula">P = 2L/&pi;</p>
+        <p>
+        With P approximated by the ratio of hits to the total number of tosses, the formula offers a way
+        of evaluating &pi;, an observation that eventually led Pierre Simon Laplace (1749-1827) to propose
+        a method, known today as the Monte Carlo Method, for numerical evaluation of various quantities
+        by realizing appropriate random events.
+        <p>
+        History records several names of people who applied the method manually to approximate &pi;.
+        A Captain Fox indulged himself while recuperating from wounds incurred in the Civil War.
+        H. D&ouml;rrie mentions Wolf from Zurich (1850) who obtained &pi; = 3.1596 after 5000 throws, and the
+        Englishmen Smith (1855) and Fox (1864) who obtained &pi; = 3.1553 and &pi; = 3.1419 after 3200 and
+        1100 throws, respectively. The record is held by an Italian mathematician Lazzerini (1901), who
+        attained the accuracy of six decimal (3.1415929) digits after just 3408 throws. As there does not
+        appear any definite relationship between the number of throws and the accuracy of the approximation,
+        Lazzerini's success should probably be attributed to chance or luck as the case may be.
+        (The best Theory of Probability can do is to assure accuracy with a certain probability.
+        The expected accuracy may or may not be achieved in any particular set of experiments.)
+        </p>
+        See the whole article at <a href="http://www.cut-the-knot.org/ctk/August2001.shtml">Math Surprises</a>
+      </article>
     </div>
 
     <div id="instructions_panel" class="panel right_panel">
       <header>
         <h2 class="header_title">Instructions</h2>
-        <span id="hide_instructions">close</span>
+        <span id="hide_instructions" class="hide"></span>
       </header>
-      <p>
-        Start or resume a simulation with the <span class="start">&nbsp;Start&nbsp;</span> button.
-        Unless you enter a <span class="max-tosses">Number of Tosses</span> larger than 0,
-        the simulation runs until you hit the <span class="stop">&nbsp;Stop&nbsp;</span> button.
-      </p><p>
-        Create a new simulation ("Restart") with the <span class="new">&nbsp;New&nbsp;</span> button.
-      </p>
-        Overlay panels can be dragged out of the way.
+      <article id=instructions_body>
+        <p>
+          Drop needles at random on the floor: the proportion of needles falling across
+          <span class="yellow">cracks</span> between the floor boards (marked
+          <span class="hits">green</span>) gives a statistical estimate of the value of &pi;
+          (see Introduction).
+        </p><p>
+          Start or resume a simulation with the <span class="start">&nbsp;Start&nbsp;</span> button.
+          Unless you enter a <span class="max-tosses">Number of Tosses</span> larger than 0,
+          the simulation runs until you hit the <span class="stop">&nbsp;Stop&nbsp;</span> button.
+        </p><p>
+          Create a new simulation ("Restart") with the <span class="new">&nbsp;New&nbsp;</span> button.
+        </p>
+          Overlay panels can be dragged out of the way.
+      </article>
     </div>
 
     <div id="control_panel" class="panel">
