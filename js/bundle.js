@@ -151,6 +151,7 @@
 	  document.getElementById('start').addEventListener('click', function()
 	    {
 	      self.running = true;
+	      self.max = document.getElementById('max').value;
 	      setTimeout(self.dropNeedle.bind(self), 200);
 	    }
 	  );
